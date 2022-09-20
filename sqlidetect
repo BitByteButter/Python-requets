@@ -1,0 +1,14 @@
+import requests
+#http://testphp.vulnweb.com/artists.php?artist=
+test = ["'","\"","`","1","2","3"]
+xss = ['><h1>Test</h1>','\'><script>alert(1);</script>']
+output = ['<h1>Test</h1>','<script>alert(1);</script>']
+gg = input("Type the url")
+for i in test:
+    url = gg+i
+    print(url)
+    req = requests.get(url)
+    if "mysql_fetch_array" in req.text:
+        print("Found SQLI based error")
+    else:
+        print("NAHNAH")
